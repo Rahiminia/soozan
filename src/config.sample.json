@@ -1,0 +1,9 @@
+{
+  "TOKEN_SECRET":"secret string",
+  "DB_CONN":{
+    "host": "mysql host",
+    "user": "mysql user",
+    "password": "mysql password",
+    "database": "mysql database name"
+  }
+}

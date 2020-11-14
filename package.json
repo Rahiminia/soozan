@@ -1,0 +1,22 @@
+{
+  "name": "kanban",
+  "version": "1.0.0",
+  "description": "A kanban-board API for managing your work properly!",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js"
+  },
+  "author": "Hassan Rahimi",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "pug": "^3.0.0"
+  },
+  "devDependencies": {
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.6"
+  }
+}
