@@ -22,4 +22,4 @@ app.use('/auth', auth)
 app.use('/api/v1', jwt, apiRouter)
 
 console.log(`listening on http://localhost:${PORT}`)
-app.listen(3000)
+app.listen(PORT)
