@@ -3,7 +3,7 @@ const BoardModel = require('../models/board')
 class BoardController{
   static addBoard(data){
     const newBoard = new BoardModel(data.title,data.project_id)
-    return newBoard.save()
+    return newBoard.save(data.userId)
   }
 
   static getBoards(projectId, userId){

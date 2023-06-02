@@ -8,7 +8,7 @@ class CardController{
       data.due_date,
       data.column_id
     )
-    return newCard.save()
+    return newCard.save(data.userId)
   }
 
   static getCards(colId, userId){

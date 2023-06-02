@@ -6,7 +6,6 @@ const BoardController = require('../controllers/board')
 const ColumnController = require('../controllers/column')
 const CardController = require('../controllers/card')
 const checkPostData = require('../helpers/check-post-validity')
-const getUserId = require('../helpers/get-user-id')
 
 const postDataList = {
   project:["name"],
@@ -15,14 +14,14 @@ const postDataList = {
   card:["title", "comment", "due_date", "column_id"],
 }
 
-router.post('/project',(req,res)=>{
+router.post('/project',(req, res)=>{
   if (!req.user)
     return res.json({result:"Error", msg:"Token is invalid."})
-  const data = req.body
+  const data = {...req.body, userId: req.user.userid}
   if (!checkPostData(data, postDataList.project))
     return res.json({result:"Error", msg:"Wrong format"})
   ProjectController.addProject(data)
-  .then((controllerRes)=>{
+  .then(()=>{
     console.log("Project created")
     res.json({result:"Successful", msg:"Project created"})
   })
@@ -35,11 +34,11 @@ router.post('/project',(req,res)=>{
 router.post('/board',(req,res)=>{
   if (!req.user)
     return res.json({result:"Error", msg:"Token is invalid."})
-  const data = req.body
+    const data = {...req.body, userId: req.user.userid}
   if (!checkPostData(data, postDataList.board))
     return res.json({result:"Error", msg:"Wrong format"})
   BoardController.addBoard(data)
-  .then((controllerRes)=>{
+  .then(()=>{
     console.log("Board created")
     res.json({result:"Successful", msg:"Board created"})
   })
@@ -52,11 +51,11 @@ router.post('/board',(req,res)=>{
 router.post('/column',(req,res)=>{
   if (!req.user)
     return res.json({result:"Error", msg:"Token is invalid."})
-  const data = req.body
+  const data = {...req.body, userId: req.user.userid}
   if (!checkPostData(data, postDataList.column))
     return res.json({result:"Error", msg:"Wrong format"})
   ColumnController.addColumn(data)
-  .then((controllerRes)=>{
+  .then(()=>{
     console.log("Column added")
     res.json({result:"Successful", msg:"Column added"})
   })
@@ -69,15 +68,16 @@ router.post('/column',(req,res)=>{
 router.post('/card',(req,res)=>{
   if (!req.user)
     return res.json({result:"Error", msg:"Token is invalid."})
-  const data = req.body
+  const data = {...req.body, userId: req.user.userid}
   if (!checkPostData(data, postDataList.card))
     return res.json({result:"Error", msg:"Wrong format"})
   CardController.addCard(data)
-  .then((controllerRes)=>{
+  .then(()=>{
     console.log("Card added")
     res.json({result:"Successful", msg:"Card added"})
   })
   .catch((err)=>{
+    console.log(err)
     res.json({result:"Error", msg:"Wrong format"})
   })
 })
